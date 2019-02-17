@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.72" systemVersion="18D109" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="SMVItem" representedClassName="SMVItem" syncable="YES" codeGenerationType="category">
+        <attribute name="definition" attributeType="String" syncable="YES"/>
+        <attribute name="repetition" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="vocab" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="SMVItem" positionX="-63" positionY="-18" width="128" height="90"/>
+    </elements>
+</model>
