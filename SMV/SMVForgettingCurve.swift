@@ -18,29 +18,34 @@ class SMVForgettingCurve
     var points: [CGPoint]
     var _curve: RegressionModelER?
     /// Convenient getter for the underlying _curve property.
-    var curve: RegressionModelER {
+    var curve: RegressionModelER
+    {
         if _curve == nil {
             _curve = exponentialRegression(points: points)
         }
         return _curve!
     }
     
-    init(points: [CGPoint]) {
+    init(points: [CGPoint])
+    {
         self.points = points
     }
     
-    func registerPoint(grade: CGFloat, uf: CGFloat) {
+    func registerPoint(grade: CGFloat, uf: CGFloat)
+    {
         let isRemembered = grade >= THRESHOLD_RECALL
         points.append(CGPoint(x: uf, y: isRemembered ? REMEMBERED:FORGOTTEN))
         points = points.suffix(MAX_POINTS_COUNT)
         _curve = nil
     }
     
-    func retention(uf: CGFloat)-> CGFloat {
+    func retention(uf: CGFloat)-> CGFloat
+    {
         return max(FORGOTTEN, min(curve.y(uf), REMEMBERED)) - FORGOTTEN
     }
     
-    func uf(retention: CGFloat)-> CGFloat {
+    func uf(retention: CGFloat)-> CGFloat
+    {
         return max(0, curve.x(retention + FORGOTTEN))
     }
 }

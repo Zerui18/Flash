@@ -16,12 +16,14 @@ class CoreDataHelper {
     private let container: NSPersistentContainer
     
     /// Returns the viewContext property of the associated persistent container.
-    private var viewContext: NSManagedObjectContext {
+    private var viewContext: NSManagedObjectContext
+    {
         return container.viewContext
     }
     
     /// Initialise an instance, also loading the CoreData persistent stores.
-    fileprivate init() {
+    fileprivate init()
+    {
         container = NSPersistentContainer(name: "SMVStore")
         // this should be sync call
         container.loadPersistentStores { (_, error) in

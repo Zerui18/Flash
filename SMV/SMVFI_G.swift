@@ -62,12 +62,14 @@ class SMVFI_G: Codable
         case points
     }
     
-    func encode(to encoder: Encoder) throws {
+    func encode(to encoder: Encoder) throws
+    {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(points, forKey: .points)
     }
     
-    required convenience init(from decoder: Decoder) throws {
+    required convenience init(from decoder: Decoder) throws
+    {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let points = try container.decode([CGPoint].self, forKey: .points)
         self.init(points: points)

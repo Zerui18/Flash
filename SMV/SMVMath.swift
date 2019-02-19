@@ -11,7 +11,7 @@ import Foundation
 typealias OneToOneFunc = (CGFloat) -> CGFloat
 typealias RegressionModel = (x: OneToOneFunc, y: OneToOneFunc, a: CGFloat, b: CGFloat)
 typealias RegressionModelLRTO = (x: OneToOneFunc, y: OneToOneFunc, b: CGFloat)
-typealias RegressionModelER = (x: OneToOneFunc, y: OneToOneFunc, a: CGFloat, b: CGFloat, mse: CGFloat)
+typealias RegressionModelER = (x: OneToOneFunc, y: OneToOneFunc, a: CGFloat, b: CGFloat, mse: ()-> CGFloat)
 
 func powerLawModel(a: CGFloat, b: CGFloat)-> RegressionModel
 {
@@ -84,7 +84,9 @@ func linearRegression(points: [CGPoint])-> RegressionModel
     )
 }
 
-func mse(y: OneToOneFunc, points: [CGPoint])-> CGFloat {
+// TODO: Seems that this still deviates from the original impl
+func mse(y: OneToOneFunc, points: [CGPoint])-> CGFloat
+{
     let n = CGFloat(points.count)
     return points.reduce(CGFloat(0), { (sum, point) in
         pow(y(point.x) - point.y, 2)
@@ -108,8 +110,8 @@ func exponentialRegression(points: [CGPoint])-> RegressionModelER
     let sumXLogY = points.reduce(CGFloat(0)) { (sum, point) in
         sum + point.x * log(point.y)
     }
-    let sqSumX = sumX * sumSqX
-    let a = (sumLogY * sumSqX - sumX * sumLogY) / (n * sumSqX - sqSumX)
+    let sqSumX = sumX * sumX
+    let a = (sumLogY * sumSqX - sumX * sumXLogY) / (n * sumSqX - sqSumX)
     let b = (n * sumXLogY - sumX * sumLogY) / (n * sumSqX - sqSumX)
     let _y = {x in exp(a) * exp(b * x)}
     return (
@@ -117,6 +119,6 @@ func exponentialRegression(points: [CGPoint])-> RegressionModelER
         y: _y,
         a: exp(a),
         b: b,
-        mse: mse(y: _y, points: points)
+        mse: {mse(y: _y, points: points)}
     )
 }

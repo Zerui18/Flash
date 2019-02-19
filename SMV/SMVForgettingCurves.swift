@@ -30,23 +30,23 @@ class SMVForgettingCurves: Codable
                     let p: [CGPoint]
                     if r > 0 {
                         p = (0...20).map {i in
-                            let a = -CGFloat(r + 1) / 200
-                            let b = CGFloat(i) - a * sqrt(2 / (CGFloat(r + 1)))
-                            let c = (REMEMBERED - sm.requestedFI)
+                            let _a = -CGFloat(r + 1) / 200
+                            let _b = CGFloat(i) - CGFloat(a) * sqrt(2 / CGFloat(r + 1))
+                            let _c = (REMEMBERED - sm.requestedFI)
                             return CGPoint(
                                 x: MIN_AF + NOTCH_AF * CGFloat(i),
-                                y: exp(a * b) * c
+                                y: min(REMEMBERED, exp(_a * _b) * _c)
                             )
                         }
                     }
                     else {
                         p = (0...20).map {i in
-                            let a = CGFloat(-1 / (10 + (a+1)))
-                            let b = CGFloat(i) - pow(CGFloat(a), 0.6)
-                            let c = (REMEMBERED - sm.requestedFI)
+                            let _a = -1 / CGFloat(11 + a)
+                            let _b = CGFloat(i) - pow(CGFloat(a), 0.6)
+                            let _c = (REMEMBERED - sm.requestedFI)
                             return CGPoint(
                                 x: MIN_AF + NOTCH_AF * CGFloat(i),
-                                y: exp(a * b) * c
+                                y: min(REMEMBERED, exp(_a * _b) * _c)
                             )
                         }
                     }
@@ -69,7 +69,8 @@ class SMVForgettingCurves: Codable
         case points
     }
     
-    func encode(to encoder: Encoder) throws {
+    func encode(to encoder: Encoder) throws
+    {
         var container = encoder.container(keyedBy: CodingKeys.self)
         let points = curves.map {curves in
             curves.map {curve in
@@ -79,7 +80,8 @@ class SMVForgettingCurves: Codable
         try container.encode(points, forKey: .points)
     }
     
-    required convenience init(from decoder: Decoder) throws {
+    required convenience init(from decoder: Decoder) throws
+    {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let points = try container.decode([[[CGPoint]]].self, forKey: .points)
         self.init(points: points)

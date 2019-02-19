@@ -15,20 +15,21 @@ public final class SMVEngine: Codable
 {
     
     // MARK: Properties
-    var requestedFI: CGFloat = 0.0
+    var requestedFI: CGFloat = 10
     var intervalBase = 3 * 60 * 60.0
     
     /// Items sorted by due date
     private var q = [SMVItem]()
     
-    var forgettingCurves = SMVForgettingCurves()
-    let rfm = SMVRFM()
-    let ofm = SMVOFM()
+    lazy var forgettingCurves = SMVForgettingCurves()
+    lazy var rfm = SMVRFM()
+    lazy var ofm = SMVOFM()
     var fi_g: SMVFI_G!
     
     // MARK: Init
     /// Initialise an empty (fresh) instance.
-    fileprivate init() {}
+    init() {
+    }
     
     // MARK: Private Methods
     /// Finds the appropriate index in the queue to insert the given item with binary search.
@@ -118,7 +119,8 @@ public final class SMVEngine: Codable
         case requestedFI, intervalBase, fi_g, forgettingCurves
     }
     
-    public func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws
+    {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(requestedFI, forKey: .requestedFI)
         try container.encode(intervalBase, forKey: .intervalBase)
@@ -126,7 +128,8 @@ public final class SMVEngine: Codable
         try container.encode(forgettingCurves, forKey: .forgettingCurves)
     }
     
-    required public init(from decoder: Decoder) throws {
+    required public init(from decoder: Decoder) throws
+    {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         q = try sCDHelper.fetchSortedItems()
         requestedFI = try container.decode(CGFloat.self, forKey: .requestedFI)
@@ -139,7 +142,8 @@ public final class SMVEngine: Codable
 extension SMVEngine
 {
     /// Singleton SMVEngine object. Loads archive if exists.
-    static let shared: SMVEngine = {
+    static var shared: SMVEngine =
+    {
         if FileManager.default.fileExists(atPath: archiveURL.path)
         {
             let data = try! Data(contentsOf: archiveURL)
