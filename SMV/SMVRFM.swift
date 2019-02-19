@@ -10,11 +10,11 @@ import Foundation
 
 class SMVRFM {
     
-    let sm: SMVEngine
     
-    init(sm: SMVEngine) {
-        self.sm = sm
+    init() {}
+    
+    func rf(repetition: Int, afIndex: Int)-> CGFloat
+    {
+        return sm.forgettingCurves.curves[repetition][afIndex].uf(retention: 100 - sm.requestedFI)
     }
-    
-    func rf() {}
 }

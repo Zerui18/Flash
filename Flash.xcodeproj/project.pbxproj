@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF473E3C221AD80000BFDCD9 /* SMVFI_G.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF473E3B221AD80000BFDCD9 /* SMVFI_G.swift */; };
 		BFA4E8E922199E040035D639 /* SMVMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA4E8E822199E040035D639 /* SMVMath.swift */; };
+		BFB3F1FD221C263200A6D2BF /* SMVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB3F1FC221C263200A6D2BF /* SMVTests.swift */; };
+		BFB3F1FF221C263200A6D2BF /* SMV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCAB8B322181CB000295C60 /* SMV.framework */; };
 		BFCAB89C221818B300295C60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCAB89B221818B300295C60 /* AppDelegate.swift */; };
 		BFCAB89E221818B300295C60 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCAB89D221818B300295C60 /* ViewController.swift */; };
 		BFCAB8A1221818B300295C60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFCAB89F221818B300295C60 /* Main.storyboard */; };
@@ -28,6 +31,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		BFB3F200221C263200A6D2BF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFCAB890221818B300295C60 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFCAB8B222181CB000295C60;
+			remoteInfo = SMV;
+		};
 		BFCAB8B822181CB000295C60 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFCAB890221818B300295C60 /* Project object */;
@@ -52,7 +62,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BF473E3B221AD80000BFDCD9 /* SMVFI_G.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMVFI_G.swift; sourceTree = "<group>"; };
 		BFA4E8E822199E040035D639 /* SMVMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMVMath.swift; sourceTree = "<group>"; };
+		BFB3F1FA221C263200A6D2BF /* SMVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SMVTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFB3F1FC221C263200A6D2BF /* SMVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMVTests.swift; sourceTree = "<group>"; };
+		BFB3F1FE221C263200A6D2BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFCAB898221818B300295C60 /* Flash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFCAB89B221818B300295C60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BFCAB89D221818B300295C60 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +90,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BFB3F1F7221C263200A6D2BF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFB3F1FF221C263200A6D2BF /* SMV.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFCAB895221818B300295C60 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -94,11 +116,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BFB3F1FB221C263200A6D2BF /* SMVTests */ = {
+			isa = PBXGroup;
+			children = (
+				BFB3F1FC221C263200A6D2BF /* SMVTests.swift */,
+				BFB3F1FE221C263200A6D2BF /* Info.plist */,
+			);
+			path = SMVTests;
+			sourceTree = "<group>";
+		};
 		BFCAB88F221818B300295C60 = {
 			isa = PBXGroup;
 			children = (
 				BFCAB89A221818B300295C60 /* Flash */,
 				BFCAB8B422181CB000295C60 /* SMV */,
+				BFB3F1FB221C263200A6D2BF /* SMVTests */,
 				BFCAB899221818B300295C60 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,6 +140,7 @@
 			children = (
 				BFCAB898221818B300295C60 /* Flash.app */,
 				BFCAB8B322181CB000295C60 /* SMV.framework */,
+				BFB3F1FA221C263200A6D2BF /* SMVTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -133,11 +166,12 @@
 				BFCAB8C722181D8300295C60 /* CoreDataHelper.swift */,
 				BFCAB8C022181CBF00295C60 /* SMVEngine.swift */,
 				BFCAB8C222181CCC00295C60 /* SMVItem.swift */,
-				BFA4E8E822199E040035D639 /* SMVMath.swift */,
-				BFE851BE2219A9740001B092 /* SMVForgettingCurve.swift */,
+				BF473E3B221AD80000BFDCD9 /* SMVFI_G.swift */,
 				BFE851BC2219A90F0001B092 /* SMVForgettingCurves.swift */,
-				BFE851B62219A7150001B092 /* SMVOFM.swift */,
+				BFE851BE2219A9740001B092 /* SMVForgettingCurve.swift */,
 				BFE851BA2219A8B90001B092 /* SMVRFM.swift */,
+				BFE851B62219A7150001B092 /* SMVOFM.swift */,
+				BFA4E8E822199E040035D639 /* SMVMath.swift */,
 				BFE851B82219A7B40001B092 /* SMVConst.swift */,
 				BFCAB8C422181D1100295C60 /* SMVStore.xcdatamodeld */,
 				BFCAB8B622181CB000295C60 /* Info.plist */,
@@ -159,6 +193,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		BFB3F1F9221C263200A6D2BF /* SMVTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFB3F202221C263200A6D2BF /* Build configuration list for PBXNativeTarget "SMVTests" */;
+			buildPhases = (
+				BFB3F1F6221C263200A6D2BF /* Sources */,
+				BFB3F1F7221C263200A6D2BF /* Frameworks */,
+				BFB3F1F8221C263200A6D2BF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BFB3F201221C263200A6D2BF /* PBXTargetDependency */,
+			);
+			name = SMVTests;
+			productName = SMVTests;
+			productReference = BFB3F1FA221C263200A6D2BF /* SMVTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BFCAB897221818B300295C60 /* Flash */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BFCAB8AA221818B400295C60 /* Build configuration list for PBXNativeTarget "Flash" */;
@@ -206,6 +258,9 @@
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "Zerui Chen";
 				TargetAttributes = {
+					BFB3F1F9221C263200A6D2BF = {
+						CreatedOnToolsVersion = 10.2;
+					};
 					BFCAB897221818B300295C60 = {
 						CreatedOnToolsVersion = 10.2;
 						SystemCapabilities = {
@@ -238,11 +293,19 @@
 			targets = (
 				BFCAB897221818B300295C60 /* Flash */,
 				BFCAB8B222181CB000295C60 /* SMV */,
+				BFB3F1F9221C263200A6D2BF /* SMVTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BFB3F1F8221C263200A6D2BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFCAB896221818B300295C60 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -263,6 +326,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BFB3F1F6221C263200A6D2BF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFB3F1FD221C263200A6D2BF /* SMVTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BFCAB894221818B300295C60 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -276,6 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF473E3C221AD80000BFDCD9 /* SMVFI_G.swift in Sources */,
 				BFE851BD2219A90F0001B092 /* SMVForgettingCurves.swift in Sources */,
 				BFA4E8E922199E040035D639 /* SMVMath.swift in Sources */,
 				BFCAB8C122181CBF00295C60 /* SMVEngine.swift in Sources */,
@@ -292,6 +364,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		BFB3F201221C263200A6D2BF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFCAB8B222181CB000295C60 /* SMV */;
+			targetProxy = BFB3F200221C263200A6D2BF /* PBXContainerItemProxy */;
+		};
 		BFCAB8B922181CB000295C60 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BFCAB8B222181CB000295C60 /* SMV */;
@@ -319,6 +396,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		BFB3F203221C263200A6D2BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 789MW96BQB;
+				INFOPLIST_FILE = SMVTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zerui.SMVTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BFB3F204221C263200A6D2BF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 789MW96BQB;
+				INFOPLIST_FILE = SMVTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.Zerui.SMVTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		BFCAB8A8221818B400295C60 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -535,6 +648,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BFB3F202221C263200A6D2BF /* Build configuration list for PBXNativeTarget "SMVTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFB3F203221C263200A6D2BF /* Debug */,
+				BFB3F204221C263200A6D2BF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BFCAB893221818B300295C60 /* Build configuration list for PBXProject "Flash" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

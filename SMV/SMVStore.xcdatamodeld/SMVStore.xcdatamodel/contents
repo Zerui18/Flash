@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.72" systemVersion="18D109" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="SMVItem" representedClassName="SMVItem" syncable="YES" codeGenerationType="category">
-        <attribute name="definition" attributeType="String" syncable="YES"/>
-        <attribute name="repetition" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="vocab" attributeType="String" syncable="YES"/>
+        <attribute name="af_" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="afs_" attributeType="Transformable" customClassName="[CGFloat]" syncable="YES"/>
+        <attribute name="back" attributeType="String" syncable="YES"/>
+        <attribute name="dueDate" attributeType="Date" defaultDateTimeInterval="-974035980" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="front" attributeType="String" syncable="YES"/>
+        <attribute name="lapse" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="of" attributeType="Double" defaultValueString="1" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="optimumInterval" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="previousDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="repetition" attributeType="Integer 64" defaultValueString="-1" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SMVItem" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="SMVItem" positionX="-63" positionY="-18" width="128" height="195"/>
     </elements>
 </model>

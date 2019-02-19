@@ -12,15 +12,16 @@ import CoreData
 /// Helper class for CoreData management.
 class CoreDataHelper {
     
+    /// The container holding the persistent store.
     private let container: NSPersistentContainer
     
     /// Returns the viewContext property of the associated persistent container.
-    var viewContext: NSManagedObjectContext {
+    private var viewContext: NSManagedObjectContext {
         return container.viewContext
     }
     
     /// Initialise an instance, also loading the CoreData persistent stores.
-    init() {
+    fileprivate init() {
         container = NSPersistentContainer(name: "SMVStore")
         // this should be sync call
         container.loadPersistentStores { (_, error) in
@@ -32,21 +33,40 @@ class CoreDataHelper {
     }
     
     /// Async save the container's viewContext, die on error.
-    func save() {
+    func save()
+    {
         let context = viewContext
         context.perform {
             try! context.save()
         }
     }
     
-    /// Sync perform the given block on the viewContext's queue.
-    func performSync(block: @escaping ()-> Void) {
-        viewContext.performAndWait(block)
+//    /// Sync perform the given block on the viewContext's queue.
+//    func performSync(block: @escaping ()-> Void) {
+//        viewContext.performAndWait(block)
+//    }
+//
+    /// Creates and inserts a new SMVItem object, returns it.
+    func newItem()-> SMVItem
+    {
+        return SMVItem(context: viewContext)
     }
     
-    /// Creates and inserts a new SMVItem object, returns it.
-    func newItem()-> SMVItem {
-        return SMVItem(context: viewContext)
+    /// Delete the given SMVItem from the context.
+    func delete(item: SMVItem)
+    {
+        viewContext.perform {
+            self.viewContext.delete(item)
+        }
+    }
+    
+    /// Fetch all items in ascending order of their due dates.
+    func fetchSortedItems() throws -> [SMVItem]
+    {
+        let request = NSFetchRequest<SMVItem>(entityName: "SMVItem")
+        let sDescriptor = NSSortDescriptor(keyPath: \SMVItem.dueDate, ascending: true)
+        request.sortDescriptors = [sDescriptor]
+        return try viewContext.fetch(request)
     }
 
 }

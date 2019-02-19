@@ -12,7 +12,8 @@ import Foundation
 fileprivate let MAX_POINTS_COUNT = 500
 
 // MARK: SMVForgettingCurve
-class SMVForgettingCurve {
+class SMVForgettingCurve
+{
     
     var points: [CGPoint]
     var _curve: RegressionModelER?
@@ -31,7 +32,7 @@ class SMVForgettingCurve {
     func registerPoint(grade: CGFloat, uf: CGFloat) {
         let isRemembered = grade >= THRESHOLD_RECALL
         points.append(CGPoint(x: uf, y: isRemembered ? REMEMBERED:FORGOTTEN))
-        points = Array(points.prefix(MAX_POINTS_COUNT))
+        points = points.suffix(MAX_POINTS_COUNT)
         _curve = nil
     }
     

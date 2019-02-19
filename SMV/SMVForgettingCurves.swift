@@ -13,15 +13,13 @@ let FORGOTTEN: CGFloat = 1
 let REMEMBERED: CGFloat = 100 + FORGOTTEN
 
 // MARK: SMVForgettingCurves
-class SMVForgettingCurves
+class SMVForgettingCurves: Codable
 {
     
-    let sm: SMVEngine
     let curves: [[SMVForgettingCurve]]
     
-    init(sm: SMVEngine, points: [[[CGPoint]]]? = nil)
+    init(points: [[[CGPoint]]]? = nil)
     {
-        self.sm = sm
         self.curves = (0..<RANGE_REPETITION).map { (r) in
             (0..<RANGE_AF).map { a in
                 let partialPoints: [CGPoint]
@@ -59,9 +57,31 @@ class SMVForgettingCurves
         }
     }
     
-    func registerPoint(grade: CGFloat, item: SMVItem, now: Date = Date()) {
-        let afIndex: Int = item.repetition > 0 ? item.afIndex() : item.lapse
-        curves[item.repetition][afIndex].registerPoint(grade: grade, uf: item.uf, now: now)
+    func registerPoint(grade: CGFloat, item: SMVItem, now: Date = Date())
+    {
+        let afIndex: Int = item.repetition > 0 ? item.afIndex() : Int(item.lapse)
+        curves[Int(item.repetition)][afIndex].registerPoint(grade: grade, uf: item.uf(now: now))
+    }
+
+    // MARK: Codable Conformances
+    enum CodingKeys: CodingKey
+    {
+        case points
     }
     
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        let points = curves.map {curves in
+            curves.map {curve in
+                curve.points
+            }
+        }
+        try container.encode(points, forKey: .points)
+    }
+    
+    required convenience init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let points = try container.decode([[[CGPoint]]].self, forKey: .points)
+        self.init(points: points)
+    }
 }
