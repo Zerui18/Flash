@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		BF473E3C221AD80000BFDCD9 /* SMVFI_G.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF473E3B221AD80000BFDCD9 /* SMVFI_G.swift */; };
 		BF54ED3E221CF15E000BD161 /* SMVSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF54ED3D221CF15E000BD161 /* SMVSet.swift */; };
+		BF54ED40221D99F2000BD161 /* DeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF54ED3F221D99F2000BD161 /* DeckCell.swift */; };
 		BFA4E8E922199E040035D639 /* SMVMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA4E8E822199E040035D639 /* SMVMath.swift */; };
 		BFB3F1FD221C263200A6D2BF /* SMVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB3F1FC221C263200A6D2BF /* SMVTests.swift */; };
 		BFB3F1FF221C263200A6D2BF /* SMV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCAB8B322181CB000295C60 /* SMV.framework */; };
 		BFCAB89C221818B300295C60 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCAB89B221818B300295C60 /* AppDelegate.swift */; };
-		BFCAB89E221818B300295C60 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCAB89D221818B300295C60 /* ViewController.swift */; };
-		BFCAB8A1221818B300295C60 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFCAB89F221818B300295C60 /* Main.storyboard */; };
+		BFCAB89E221818B300295C60 /* DecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCAB89D221818B300295C60 /* DecksViewController.swift */; };
 		BFCAB8A3221818B400295C60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFCAB8A2221818B400295C60 /* Assets.xcassets */; };
 		BFCAB8A6221818B400295C60 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BFCAB8A4221818B400295C60 /* LaunchScreen.storyboard */; };
 		BFCAB8B722181CB000295C60 /* SMV.h in Headers */ = {isa = PBXBuildFile; fileRef = BFCAB8B522181CB000295C60 /* SMV.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -65,14 +65,14 @@
 /* Begin PBXFileReference section */
 		BF473E3B221AD80000BFDCD9 /* SMVFI_G.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMVFI_G.swift; sourceTree = "<group>"; };
 		BF54ED3D221CF15E000BD161 /* SMVSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMVSet.swift; sourceTree = "<group>"; };
+		BF54ED3F221D99F2000BD161 /* DeckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCell.swift; sourceTree = "<group>"; };
 		BFA4E8E822199E040035D639 /* SMVMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMVMath.swift; sourceTree = "<group>"; };
 		BFB3F1FA221C263200A6D2BF /* SMVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SMVTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFB3F1FC221C263200A6D2BF /* SMVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMVTests.swift; sourceTree = "<group>"; };
 		BFB3F1FE221C263200A6D2BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BFCAB898221818B300295C60 /* Flash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFCAB89B221818B300295C60 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BFCAB89D221818B300295C60 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		BFCAB8A0221818B300295C60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BFCAB89D221818B300295C60 /* DecksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecksViewController.swift; sourceTree = "<group>"; };
 		BFCAB8A2221818B400295C60 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BFCAB8A5221818B400295C60 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BFCAB8A7221818B400295C60 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,6 +118,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF54ED41221D99F9000BD161 /* Decks */ = {
+			isa = PBXGroup;
+			children = (
+				BFCAB89D221818B300295C60 /* DecksViewController.swift */,
+				BF54ED3F221D99F2000BD161 /* DeckCell.swift */,
+			);
+			path = Decks;
+			sourceTree = "<group>";
+		};
 		BFB3F1FB221C263200A6D2BF /* SMVTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,8 +161,7 @@
 			children = (
 				BFCAB8AD2218190100295C60 /* Flash.entitlements */,
 				BFCAB89B221818B300295C60 /* AppDelegate.swift */,
-				BFCAB89D221818B300295C60 /* ViewController.swift */,
-				BFCAB89F221818B300295C60 /* Main.storyboard */,
+				BF54ED41221D99F9000BD161 /* Decks */,
 				BFCAB8A2221818B400295C60 /* Assets.xcassets */,
 				BFCAB8A4221818B400295C60 /* LaunchScreen.storyboard */,
 				BFCAB8A7221818B400295C60 /* Info.plist */,
@@ -315,7 +323,6 @@
 			files = (
 				BFCAB8A6221818B400295C60 /* LaunchScreen.storyboard in Resources */,
 				BFCAB8A3221818B400295C60 /* Assets.xcassets in Resources */,
-				BFCAB8A1221818B300295C60 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,7 +348,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BFCAB89E221818B300295C60 /* ViewController.swift in Sources */,
+				BF54ED40221D99F2000BD161 /* DeckCell.swift in Sources */,
+				BFCAB89E221818B300295C60 /* DecksViewController.swift in Sources */,
 				BFCAB89C221818B300295C60 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -381,14 +389,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		BFCAB89F221818B300295C60 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BFCAB8A0221818B300295C60 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		BFCAB8A4221818B400295C60 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -560,6 +560,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 789MW96BQB;
 				INFOPLIST_FILE = Flash/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -579,6 +580,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 789MW96BQB;
 				INFOPLIST_FILE = Flash/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -604,6 +606,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SMV/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -634,6 +637,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = SMV/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

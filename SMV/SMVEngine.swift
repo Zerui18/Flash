@@ -15,7 +15,7 @@ public final class SMVEngine: Codable
 {
     
     // MARK: Properties
-    var sets = [SMVSet]()
+    public var sets = [SMVSet]()
     var requestedFI: CGFloat = 10
     var intervalBase = 3 * 60 * 60.0
     
@@ -48,6 +48,12 @@ public final class SMVEngine: Codable
     {
         try JSONEncoder().encode(self).write(to: archiveURL)
         sCDHelper.save()
+    }
+    
+    /// Creates a new set with the provided name and description, append it into sets.
+    public func createSet(named name: String, description detail: String)
+    {
+        sets.append(SMVSet(name: name, detail: detail))
     }
     
     // MARK: Codable Conformance

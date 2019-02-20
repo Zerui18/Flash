@@ -78,4 +78,41 @@ public class SMVSet: NSManagedObject
         return nil
     }
     
+    // MARK: Init
+    /// Initialise a new set with the provided name and detail.
+    convenience init(name: String, detail: String)
+    {
+        self.init(context: sCDHelper.viewContext)
+        self.name = name
+        self.detail = description
+        self.creationDate = Date()
+    }
+    
+    // MARK: Urgency
+    public enum Urgency
+    {
+        /// overdue > 10
+        case high
+        /// 0 > overdue > 10
+        case medium
+        /// overdue == 0
+        case low
+    }
+    
+    /// Urgency sampling the first 10 items in queue.
+    public var urgency: Urgency
+    {
+        let overdueCnt = itemsQueue.prefix(10).count(where: { (item) in
+            item.dueDate!.timeIntervalSinceNow < 0
+        })
+        if overdueCnt > 10
+        {
+            return .high
+        }
+        if overdueCnt > 0
+        {
+            return .medium
+        }
+        return .low
+    }
 }
