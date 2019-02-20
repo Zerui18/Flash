@@ -16,7 +16,7 @@ class CoreDataHelper {
     private let container: NSPersistentContainer
     
     /// Returns the viewContext property of the associated persistent container.
-    private var viewContext: NSManagedObjectContext
+    var viewContext: NSManagedObjectContext
     {
         return container.viewContext
     }
@@ -43,17 +43,6 @@ class CoreDataHelper {
         }
     }
     
-//    /// Sync perform the given block on the viewContext's queue.
-//    func performSync(block: @escaping ()-> Void) {
-//        viewContext.performAndWait(block)
-//    }
-//
-    /// Creates and inserts a new SMVItem object, returns it.
-    func newItem()-> SMVItem
-    {
-        return SMVItem(context: viewContext)
-    }
-    
     /// Delete the given SMVItem from the context.
     func delete(item: SMVItem)
     {
@@ -62,15 +51,13 @@ class CoreDataHelper {
         }
     }
     
-    /// Fetch all items in ascending order of their due dates.
-    func fetchSortedItems() throws -> [SMVItem]
+    /// Fetch all sets.
+    func fetchAllSets() throws -> [SMVSet]
     {
-        let request = NSFetchRequest<SMVItem>(entityName: "SMVItem")
-        let sDescriptor = NSSortDescriptor(keyPath: \SMVItem.dueDate, ascending: true)
-        request.sortDescriptors = [sDescriptor]
-        return try viewContext.fetch(request)
+        return try viewContext.fetch(SMVSet.fetchRequest())
     }
 
 }
 
+/// Shared instance of CoreDataHelper.
 let sCDHelper = CoreDataHelper()

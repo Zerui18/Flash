@@ -11,14 +11,14 @@ import Foundation
 let MAX_POINT_COUNT = 5000
 let GRADE_OFFSET: CGFloat = 1
 
+/// Grade over forgetting-index graph.
 class SMVFI_G: Codable
 {
     
-    var points: [CGPoint]
-    
-    var _graph: RegressionModelER?
+    private var points: [CGPoint]
+    private var _graph: RegressionModelER?
     /// Convenient getter for the underlying _graph property.
-    var graph: RegressionModelER
+    private var graph: RegressionModelER
     {
         if _graph == nil {
             _graph = exponentialRegression(points: points)
@@ -26,18 +26,29 @@ class SMVFI_G: Codable
         return _graph!
     }
     
+    /// Initialise the graph with the given points, otherwise two default points will be set as starting point.
     init(points: [CGPoint]? = nil)
     {
-        self.points = points ?? []
+        if points != nil
+        {
+            self.points = points!
+        }
+        else
+        {
+            self.points = []
+            _registerPoint(fi: 0, g: MAX_GRADE)
+            _registerPoint(fi: 100, g: 0)
+        }
     }
     
-    func _registerPoint(fi: CGFloat, g: CGFloat)
+    /// Append the new point to points, while maintaining max length of MAX_POINT_COUNT.
+    private func _registerPoint(fi: CGFloat, g: CGFloat)
     {
         points.append(CGPoint(x: fi, y: g + GRADE_OFFSET))
         points = points.suffix(MAX_POINT_COUNT)
     }
     
-    /// Update regression of FI-G graph
+    /// Update the FI-G graph by registering the new points, clears the previous regression model.
     func update(grade: CGFloat, item: SMVItem, now: Date = Date())
     {
         let expectedFI = item.uf(now: now) / CGFloat(item.of) * sm.requestedFI
@@ -45,12 +56,13 @@ class SMVFI_G: Codable
         _graph = nil
     }
     
-    /// Estimate forgetting index
+    /// Estimate forgetting-index from grade.
     func fi(grade: CGFloat)-> CGFloat
     {
         return max(0, min(100, graph.x(grade + GRADE_OFFSET)))
     }
     
+    /// Estimate grade from forgetting-index.
     func grade(fi: CGFloat)-> CGFloat
     {
         return graph.y(fi) - GRADE_OFFSET

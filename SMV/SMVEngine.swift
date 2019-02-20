@@ -10,48 +10,29 @@ import Foundation
 import CoreData
 
 // MARK: SMVEngine
-/// Class encapsulating the main logic of the SM-15 algorithm.
+/// Manages all sets of items, as well as their shared statistics. Currently, one memory model is shared across all sets, based on the assumption that regardless of type, items with the same difficulty property will have identical memory factors.
 public final class SMVEngine: Codable
 {
     
     // MARK: Properties
+    var sets = [SMVSet]()
     var requestedFI: CGFloat = 10
     var intervalBase = 3 * 60 * 60.0
     
-    /// Items sorted by due date
-    private var q = [SMVItem]()
-    
+    // Lazily initialized to break initialization circle
     lazy var forgettingCurves = SMVForgettingCurves()
     lazy var rfm = SMVRFM()
     lazy var ofm = SMVOFM()
-    var fi_g: SMVFI_G!
+    lazy var fi_g = SMVFI_G()
     
     // MARK: Init
     /// Initialise an empty (fresh) instance.
     init() {
     }
     
-    // MARK: Private Methods
-    /// Finds the appropriate index in the queue to insert the given item with binary search.
-    private func _findIndexToInsert(item: SMVItem, lowerI: Int = 0, upperI: Int = -1)-> Int
-    {
-        let actUpperI = upperI >= 0 ? upperI:q.count-1
-        if actUpperI == lowerI
-        {
-            return lowerI
-        }
-        let midI = (actUpperI + lowerI) / 2
-        if q[midI].dueDate! < item.dueDate!
-        {
-            return _findIndexToInsert(item: item, lowerI: midI + 1, upperI: actUpperI)
-        }
-        else
-        {
-            return _findIndexToInsert(item: item, lowerI: lowerI, upperI: midI - 1)
-        }
-    }
-    
-    private func _update(grade: CGFloat, item: SMVItem, now: Date = Date())
+    // MARK: Internal Methods
+    /// Registers the update onto the forgettign curves and update ofm n fi_g, if item has non-negative repetition. (learnt)
+    func update(grade: CGFloat, item: SMVItem, now: Date = Date())
     {
         if item.repetition >= 0
         {
@@ -59,55 +40,11 @@ public final class SMVEngine: Codable
             ofm.update()
             fi_g.update(grade: grade, item: item, now: now)
         }
-        item.answer(grade: grade, now: now)
     }
     
-    /// Removes the item from the queue.
-    private func removeFromQueue(item: SMVItem)
-    {
-        if let index = q.firstIndex(of: item)
-        {
-            q.remove(at: index)
-        }
-    }
-    
-    /// Inserts the item into the queue at the appropriate index, removing it first it's present.
-    private func insertIntoQueue(item: SMVItem)
-    {
-        removeFromQueue(item: item)
-        q.insert(item, at: _findIndexToInsert(item: item))
-    }
-    
-    /// Create and add a new item into the queue.
-    public func addItem(front: String, back: String)
-    {
-        let item = SMVItem.new(front: front, back: back)
-        q.insert(item, at: _findIndexToInsert(item: item))
-    }
-    
-    /// Returns the next item which is past due date in the queue, nil if none.
-    public func nextItem(isAdvanceable: Bool = false)-> SMVItem?
-    {
-        if q.isEmpty
-        {
-            return nil
-        }
-        if isAdvanceable || q[0].dueDate!.timeIntervalSinceNow < 0
-        {
-            return q[0]
-        }
-        return nil
-    }
-    
-    /// Inform the engine that the specified item has been answered.
-    public func answer(grade: CGFloat, item: SMVItem, now: Date = Date())
-    {
-        _update(grade: grade, item: item, now: now)
-        insertIntoQueue(item: item)
-    }
-    
+    // MARK: Public API
     /// Save an archive file of this SMVEngine onto disk, also saves its items with CoreData.
-    func saveToDisk() throws
+    public func saveToDisk() throws
     {
         try JSONEncoder().encode(self).write(to: archiveURL)
         sCDHelper.save()
@@ -131,7 +68,7 @@ public final class SMVEngine: Codable
     required public init(from decoder: Decoder) throws
     {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        q = try sCDHelper.fetchSortedItems()
+        sets = try sCDHelper.fetchAllSets()
         requestedFI = try container.decode(CGFloat.self, forKey: .requestedFI)
         intervalBase = try container.decode(TimeInterval.self, forKey: .intervalBase)
         fi_g = try container.decode(SMVFI_G.self, forKey: .fi_g)
@@ -142,7 +79,7 @@ public final class SMVEngine: Codable
 extension SMVEngine
 {
     /// Singleton SMVEngine object. Loads archive if exists.
-    static var shared: SMVEngine =
+    public static var shared: SMVEngine =
     {
         if FileManager.default.fileExists(atPath: archiveURL.path)
         {

@@ -16,7 +16,8 @@ class SMVForgettingCurve
 {
     
     var points: [CGPoint]
-    var _curve: RegressionModelER?
+    /// The exponential regression model of this curve.
+    private var _curve: RegressionModelER?
     /// Convenient getter for the underlying _curve property.
     var curve: RegressionModelER
     {
@@ -31,6 +32,7 @@ class SMVForgettingCurve
         self.points = points
     }
     
+    /// Appends a new point to this curve, clears the current regression model.
     func registerPoint(grade: CGFloat, uf: CGFloat)
     {
         let isRemembered = grade >= THRESHOLD_RECALL

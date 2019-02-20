@@ -8,8 +8,8 @@
 
 import Foundation
 
+/// Retention-factor matrix.
 class SMVRFM {
-    
     
     init() {}
     

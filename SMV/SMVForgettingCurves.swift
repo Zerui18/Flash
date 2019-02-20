@@ -12,7 +12,7 @@ import Foundation
 let FORGOTTEN: CGFloat = 1
 let REMEMBERED: CGFloat = 100 + FORGOTTEN
 
-// MARK: SMVForgettingCurves
+// MARK: 2D Collection of forgettingCurve.
 class SMVForgettingCurves: Codable
 {
     
@@ -57,6 +57,7 @@ class SMVForgettingCurves: Codable
         }
     }
     
+    /// Register a point representing the grading event in the suitable forgetting-curve.
     func registerPoint(grade: CGFloat, item: SMVItem, now: Date = Date())
     {
         let afIndex: Int = item.repetition > 0 ? item.afIndex() : Int(item.lapse)

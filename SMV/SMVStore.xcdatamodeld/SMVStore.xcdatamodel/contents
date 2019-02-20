@@ -11,8 +11,15 @@
         <attribute name="optimumInterval" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="previousDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="repetition" attributeType="Integer 64" defaultValueString="-1" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="set" maxCount="1" deletionRule="Nullify" destinationEntity="SMVSet" inverseName="itemsQueueAny" inverseEntity="SMVSet" syncable="YES"/>
+    </entity>
+    <entity name="SMVSet" representedClassName="SMVSet" syncable="YES" codeGenerationType="category">
+        <attribute name="detail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="itemsQueueAny" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SMVItem" inverseName="set" inverseEntity="SMVItem" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SMVItem" positionX="-63" positionY="-18" width="128" height="195"/>
+        <element name="SMVItem" positionX="295.890625" positionY="83.75390625" width="128" height="208"/>
+        <element name="SMVSet" positionX="-63" positionY="54" width="128" height="88"/>
     </elements>
 </model>

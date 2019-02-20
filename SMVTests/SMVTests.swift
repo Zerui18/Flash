@@ -70,5 +70,12 @@ class SMVTests: XCTestCase {
         })
         XCTAssertEqual(round(sum), -8299)
     }
+    
+    func testFI_G()
+    {
+        let sm = SMVEngine.shared
+        let fi_g = sm.fi_g
+        XCTAssertEqual(fi_g.fi(grade: <#T##CGFloat#>), <#T##expression2: Equatable##Equatable#>)
+    }
 
 }

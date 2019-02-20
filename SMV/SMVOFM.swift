@@ -11,15 +11,15 @@ import Foundation
 // MARK: Constants
 fileprivate let INITIAL_REP_VALUE: CGFloat = 1
 
-fileprivate func afFromIndex(a: Int)-> CGFloat
+fileprivate func af(at index: Int)-> CGFloat
 {
-    return CGFloat(a) * NOTCH_AF + MIN_AF
+    return CGFloat(index) * NOTCH_AF + MIN_AF
 }
 
 /// Repetition value used for regression
-fileprivate func repFromIndex(r: Int)-> CGFloat
+fileprivate func repetition(at index: Int)-> CGFloat
 {
-    return CGFloat(r) + INITIAL_REP_VALUE
+    return CGFloat(index) + INITIAL_REP_VALUE
 }
 
 // MARK: SMVOFM
@@ -47,11 +47,11 @@ class SMVOFM
         // D-factor (a/p^b): the basis of decline of O-Factors, the decay constant of power approximation along RF matrix columns
         var dfs = (0..<RANGE_AF).map { (a) in
             fixedPointPowerLawRegression(points: (1..<RANGE_REPETITION).map({ (r) in
-                CGPoint(x: repFromIndex(r: r), y: sm.rfm.rf(repetition: r, afIndex: a))
-            }), fixedPoint: CGPoint(x: repFromIndex(r: 1), y: afFromIndex(a: a))).b
+                CGPoint(x: repetition(at: r), y: sm.rfm.rf(repetition: r, afIndex: a))
+            }), fixedPoint: CGPoint(x: repetition(at: 1), y: SMV.af(at: a))).b
         }
         dfs = (0..<RANGE_AF).map {a in
-            afFromIndex(a: a) / pow(2, dfs[a])
+            SMV.af(at: a) / pow(2, dfs[a])
         }
         
         _decay = linearRegression(points: (0..<RANGE_AF).map({ (a) in
@@ -67,12 +67,12 @@ class SMVOFM
         guard let decay = _decay else {
             return nil
         }
-        let af = afFromIndex(a: a)
-        let b = log(af / decay.y(CGFloat(a))) / log(repFromIndex(r: 1))
-        let model = powerLawModel(a: af / pow(repFromIndex(r: 1), b), b: b)
+        let af = SMV.af(at: a)
+        let b = log(af / decay.y(CGFloat(a))) / log(repetition(at: 1))
+        let model = powerLawModel(a: af / pow(repetition(at: 1), b), b: b)
         return (
             x: {y in model.x(y) - INITIAL_REP_VALUE},
-            y: {r in model.y(repFromIndex(r: Int(r)))}
+            y: {r in model.y(repetition(at: Int(r)))}
         )
     }
     
@@ -103,7 +103,7 @@ class SMVOFM
             let b = self.of(repetition: repetition, afIndex: i)! - of_
             return a < b ? I:i
         }
-        return afFromIndex(a: id)
+        return SMV.af(at: id)
     }
 }
 

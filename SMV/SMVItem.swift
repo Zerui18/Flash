@@ -33,6 +33,7 @@ public final class SMVItem: NSManagedObject
         }
     }
     
+    /// Returns the interval from the previousDate to now, otherwise returns the default value of 'intervalBase'
     func interval(now: Date = Date())-> TimeInterval
     {
         if previousDate == nil
@@ -71,8 +72,8 @@ public final class SMVItem: NSManagedObject
         })
     }
     
-    /// Obtain optimum interval
-    func _I(now: Date = Date())
+    /// Obtain and update optimum interval, also updates correspondingly the previous & due dates.
+    private func I(now: Date = Date())
     {
         let afI = repetition == 0 ? Int(lapse):afIndex()
         guard let of_ = sm.ofm.of(repetition: Int(repetition), afIndex: afI) else
@@ -84,7 +85,7 @@ public final class SMVItem: NSManagedObject
     }
     
     @discardableResult
-    func _updateAF(grade: CGFloat, now: Date = Date())-> CGFloat
+    private func updateAF(grade: CGFloat, now: Date = Date())-> CGFloat
     {
         var estimatedFI = max(1, sm.fi_g.fi(grade: grade))
         let correctedUF = uf(now: now) * (sm.requestedFI / estimatedFI)
@@ -104,11 +105,12 @@ public final class SMVItem: NSManagedObject
         return af(value: ave)
     }
     
-    func answer(grade: CGFloat, now: Date = Date())
+    /// Updates the properties with the new grade.
+    private func update(grade: CGFloat, now: Date = Date())
     {
         if repetition >= 0
         {
-            _updateAF(grade: grade, now: now)
+            updateAF(grade: grade, now: now)
         }
         if grade >= THRESHOLD_RECALL
         {
@@ -116,7 +118,7 @@ public final class SMVItem: NSManagedObject
             {
                 repetition += 1
             }
-            _I(now: now)
+            I(now: now)
         }
         else
         {
@@ -130,17 +132,22 @@ public final class SMVItem: NSManagedObject
             repetition = -1
         }
     }
-}
-
-extension SMVItem
-{
     
-    public class func new(front: String, back: String)-> SMVItem
+    /// Inform the engine that the item has been graded. (reviewed and given a valid grade)
+    public func grade(_ grade: CGFloat, now: Date = Date())
     {
-        let new = sCDHelper.newItem()
-        new.front = front
-        new.back = back
-        return new
+        sm.update(grade: grade, item: self, now: now)
+        update(grade: grade, now: now)
+        set!.insertIntoQueue(item: self)
     }
     
+    // MARK: Init
+    /// Initialise a new item with the provided front and back.
+    convenience init(front: String, back: String, into set: SMVSet)
+    {
+        self.init(context: sCDHelper.viewContext)
+        self.front = front
+        self.back = back
+        self.set = set
+    }
 }

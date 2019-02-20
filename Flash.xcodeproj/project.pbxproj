@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BF473E3C221AD80000BFDCD9 /* SMVFI_G.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF473E3B221AD80000BFDCD9 /* SMVFI_G.swift */; };
+		BF54ED3E221CF15E000BD161 /* SMVSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF54ED3D221CF15E000BD161 /* SMVSet.swift */; };
 		BFA4E8E922199E040035D639 /* SMVMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA4E8E822199E040035D639 /* SMVMath.swift */; };
 		BFB3F1FD221C263200A6D2BF /* SMVTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB3F1FC221C263200A6D2BF /* SMVTests.swift */; };
 		BFB3F1FF221C263200A6D2BF /* SMV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFCAB8B322181CB000295C60 /* SMV.framework */; };
@@ -63,6 +64,7 @@
 
 /* Begin PBXFileReference section */
 		BF473E3B221AD80000BFDCD9 /* SMVFI_G.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMVFI_G.swift; sourceTree = "<group>"; };
+		BF54ED3D221CF15E000BD161 /* SMVSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMVSet.swift; sourceTree = "<group>"; };
 		BFA4E8E822199E040035D639 /* SMVMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMVMath.swift; sourceTree = "<group>"; };
 		BFB3F1FA221C263200A6D2BF /* SMVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SMVTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFB3F1FC221C263200A6D2BF /* SMVTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMVTests.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				BFCAB8B522181CB000295C60 /* SMV.h */,
 				BFCAB8C722181D8300295C60 /* CoreDataHelper.swift */,
 				BFCAB8C022181CBF00295C60 /* SMVEngine.swift */,
+				BF54ED3D221CF15E000BD161 /* SMVSet.swift */,
 				BFCAB8C222181CCC00295C60 /* SMVItem.swift */,
 				BF473E3B221AD80000BFDCD9 /* SMVFI_G.swift */,
 				BFE851BC2219A90F0001B092 /* SMVForgettingCurves.swift */,
@@ -352,6 +355,7 @@
 				BFA4E8E922199E040035D639 /* SMVMath.swift in Sources */,
 				BFCAB8C122181CBF00295C60 /* SMVEngine.swift in Sources */,
 				BFE851BF2219A9740001B092 /* SMVForgettingCurve.swift in Sources */,
+				BF54ED3E221CF15E000BD161 /* SMVSet.swift in Sources */,
 				BFE851BB2219A8B90001B092 /* SMVRFM.swift in Sources */,
 				BFCAB8C322181CCC00295C60 /* SMVItem.swift in Sources */,
 				BFE851B92219A7B40001B092 /* SMVConst.swift in Sources */,
