@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SMV
 
 /// View Controller that displays all the decks of the user in a list of cards.
 class DecksViewController: UIViewController
@@ -17,10 +18,16 @@ class DecksViewController: UIViewController
         let itemWidth = (332 / 375) * view.bounds.width
         let itemHeight = (136 / 332) * itemWidth
         layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
-        layout.minimumLineSpacing = itemWidth / 3.5
+        layout.minimumLineSpacing = itemHeight / 4
         layout.sectionInset = UIEdgeInsets(top: layout.minimumLineSpacing, left: 0, bottom: 0, right: 0)
         return layout
     }())
+    let addButton = UIButton()
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle
+    {
+        return .lightContent
+    }
 
     override func viewDidLoad()
     {
@@ -31,11 +38,25 @@ class DecksViewController: UIViewController
     private func setupLayout()
     {
         title = "Decks"
-        view.backgroundColor = UIColor(named: "BgGrey")!
+        decksCollectionView.bounces = true
+        decksCollectionView.backgroundColor = .bgGrey
         decksCollectionView.dataSource = self
         decksCollectionView.delegate = self
         decksCollectionView.frame = view.safeAreaLayoutGuide.layoutFrame
+        decksCollectionView.register(DeckCell.self, forCellWithReuseIdentifier: "cell")
         view.addSubview(decksCollectionView)
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.layer.cornerRadius = 64 / 2
+        addButton.backgroundColor = .pBlue
+        addButton.tintColor = .white
+        addButton.setImage(#imageLiteral(resourceName: "baseline_add_white_48pt"), for: .normal)
+        addButton.layer.masksToBounds = false
+        addButton.addShadow(ofRadius: 15)
+        view.addSubview(addButton)
+        addButton.widthAnchor.constraint(equalToConstant: 64).isActive = true
+        addButton.heightAnchor.constraint(equalToConstant: 64).isActive = true
+        addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        addButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
     }
 
 }
@@ -49,10 +70,13 @@ extension DecksViewController: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return 4
+        return SMVEngine.shared.sets.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = Deck
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DeckCell
+        cell.set = SMVEngine.shared.sets[indexPath.item]
+        return cell
     }
 }

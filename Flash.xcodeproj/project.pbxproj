@@ -24,6 +24,9 @@
 		BFCAB8C322181CCC00295C60 /* SMVItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCAB8C222181CCC00295C60 /* SMVItem.swift */; };
 		BFCAB8C622181D1100295C60 /* SMVStore.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFCAB8C422181D1100295C60 /* SMVStore.xcdatamodeld */; };
 		BFCAB8C822181D8300295C60 /* CoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCAB8C722181D8300295C60 /* CoreDataHelper.swift */; };
+		BFD7438F221EBA7C00C84CB2 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD7438E221EBA7C00C84CB2 /* Colors.swift */; };
+		BFD74392221EBB5500C84CB2 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD74391221EBB5500C84CB2 /* UIView+Extension.swift */; };
+		BFD74393221EBD1600C84CB2 /* SMVStore.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = BFCAB8C422181D1100295C60 /* SMVStore.xcdatamodeld */; };
 		BFE851B72219A7150001B092 /* SMVOFM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE851B62219A7150001B092 /* SMVOFM.swift */; };
 		BFE851B92219A7B40001B092 /* SMVConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE851B82219A7B40001B092 /* SMVConst.swift */; };
 		BFE851BB2219A8B90001B092 /* SMVRFM.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE851BA2219A8B90001B092 /* SMVRFM.swift */; };
@@ -84,6 +87,8 @@
 		BFCAB8C222181CCC00295C60 /* SMVItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMVItem.swift; sourceTree = "<group>"; };
 		BFCAB8C522181D1100295C60 /* SMVStore.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SMVStore.xcdatamodel; sourceTree = "<group>"; };
 		BFCAB8C722181D8300295C60 /* CoreDataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelper.swift; sourceTree = "<group>"; };
+		BFD7438E221EBA7C00C84CB2 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		BFD74391221EBB5500C84CB2 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		BFE851B62219A7150001B092 /* SMVOFM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMVOFM.swift; sourceTree = "<group>"; };
 		BFE851B82219A7B40001B092 /* SMVConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMVConst.swift; sourceTree = "<group>"; };
 		BFE851BA2219A8B90001B092 /* SMVRFM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMVRFM.swift; sourceTree = "<group>"; };
@@ -161,6 +166,7 @@
 			children = (
 				BFCAB8AD2218190100295C60 /* Flash.entitlements */,
 				BFCAB89B221818B300295C60 /* AppDelegate.swift */,
+				BFD74390221EBB3E00C84CB2 /* Utils */,
 				BF54ED41221D99F9000BD161 /* Decks */,
 				BFCAB8A2221818B400295C60 /* Assets.xcassets */,
 				BFCAB8A4221818B400295C60 /* LaunchScreen.storyboard */,
@@ -188,6 +194,15 @@
 				BFCAB8B622181CB000295C60 /* Info.plist */,
 			);
 			path = SMV;
+			sourceTree = "<group>";
+		};
+		BFD74390221EBB3E00C84CB2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				BFD7438E221EBA7C00C84CB2 /* Colors.swift */,
+				BFD74391221EBB5500C84CB2 /* UIView+Extension.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,6 +336,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFD74393221EBD1600C84CB2 /* SMVStore.xcdatamodeld in Resources */,
 				BFCAB8A6221818B400295C60 /* LaunchScreen.storyboard in Resources */,
 				BFCAB8A3221818B400295C60 /* Assets.xcassets in Resources */,
 			);
@@ -349,7 +365,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF54ED40221D99F2000BD161 /* DeckCell.swift in Sources */,
+				BFD7438F221EBA7C00C84CB2 /* Colors.swift in Sources */,
 				BFCAB89E221818B300295C60 /* DecksViewController.swift in Sources */,
+				BFD74392221EBB5500C84CB2 /* UIView+Extension.swift in Sources */,
 				BFCAB89C221818B300295C60 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

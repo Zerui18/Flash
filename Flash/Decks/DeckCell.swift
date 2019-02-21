@@ -23,33 +23,51 @@ class DeckCell: UICollectionViewCell
     }
     
     private let nameLabel = UILabel()
-    private let descriptionLabel = UILabel()
+    private let descriptionLabel = TopAlignedLabel()
     private let statusIndicator = UIView()
     
     override init(frame: CGRect)
     {
         super.init(frame: frame)
+        // round corners
+        contentView.backgroundColor = .white
+        contentView.layer.cornerRadius = 5
+        contentView.layer.borderWidth = 1.0
+        contentView.layer.borderColor = UIColor.clear.cgColor
+        contentView.layer.masksToBounds = true
+        
+        layer.shadowColor = UIColor.shadowGrey.cgColor
+        layer.shadowOffset = .zero
+        layer.shadowRadius = 10
+        layer.shadowOpacity = 0.35
+        layer.masksToBounds = false
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: contentView.layer.cornerRadius).cgPath
+        layer.backgroundColor = UIColor.clear.cgColor
+        
         // setup nameLabel
         nameLabel.font = .systemFont(ofSize: 27, weight: .medium)
-        nameLabel.textColor = UIColor(named: "PrimaryBlue")
+        nameLabel.textColor = .pBlue
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.setContentHuggingPriority(UILayoutPriority(rawValue: 1000), for: .vertical)
         contentView.addSubview(nameLabel)
-        nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
         
         // setup descriptionLabel
         descriptionLabel.font = .systemFont(ofSize: 18, weight: .medium)
-        descriptionLabel.textColor = UIColor(named: "PrimaryGrey")
+        descriptionLabel.textColor = .textGrey
         descriptionLabel.numberOfLines = 3
+        descriptionLabel.contentMode = .topLeft
         contentView.addSubview(descriptionLabel)
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
-        descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 12).isActive = true
+        descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12).isActive = true
         
         // setup statusIndicator
         statusIndicator.layer.cornerRadius = 7.5
-        statusIndicator.backgroundColor = UIColor(named: "PrimaryBlue")
+        statusIndicator.backgroundColor = .pBlue
         statusIndicator.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(statusIndicator)
         statusIndicator.widthAnchor.constraint(equalToConstant: 15).isActive = true
@@ -67,16 +85,23 @@ class DeckCell: UICollectionViewCell
 
 extension SMVSet.Urgency
 {
-    var color: UIColor
+    var color: UIColor?
     {
         switch self
         {
         case .high:
-            return UIColor(named: "PrimaryRed")!
+            return .pRed
         case .medium:
-            return UIColor(named: "PrimaryOrange")!
+            return .pOrange
         case .low:
-            return UIColor(named: "PrimaryBlue")!
+            return nil
         }
+    }
+}
+
+class TopAlignedLabel: UILabel {
+    override func drawText(in rect: CGRect) {
+        let textRect = super.textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines)
+        super.drawText(in: textRect)
     }
 }

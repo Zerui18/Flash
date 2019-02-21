@@ -13,34 +13,35 @@ import CoreData
 public class SMVSet: NSManagedObject
 {
     
-    lazy var itemsQueue = mutableArrayValue(forKey: "itemsQueueAny") as! [SMVItem]
+    lazy var itemsQueue = mutableOrderedSetValue(forKey: "itemsQueueAny")
     
     /// Finds the appropriate index in the queue to insert the given item with binary search.
     private func _findIndexToInsert(item: SMVItem, lowerI: Int = 0, upperI: Int = -1)-> Int
     {
+        if itemsQueue.count == 0
+        {
+            return 0
+        }
         let actUpperI = upperI >= 0 ? upperI:itemsQueue.count-1
         if actUpperI == lowerI
         {
             return lowerI
         }
-        let midI = (actUpperI + lowerI) / 2
-        if itemsQueue[midI].dueDate! < item.dueDate!
+        let (midI, r) = (actUpperI + lowerI).quotientAndRemainder(dividingBy: 2)
+        if (itemsQueue[midI] as! SMVItem).dueDate! > item.dueDate!
         {
-            return _findIndexToInsert(item: item, lowerI: midI + 1, upperI: actUpperI)
+            return _findIndexToInsert(item: item, lowerI: lowerI, upperI: midI - r)
         }
         else
         {
-            return _findIndexToInsert(item: item, lowerI: lowerI, upperI: midI - 1)
+            return _findIndexToInsert(item: item, lowerI: midI + r, upperI: actUpperI)
         }
     }
     
     /// Removes the item from the queue.
     private func removeFromQueue(item: SMVItem)
     {
-        if let index = itemsQueue.firstIndex(of: item)
-        {
-            itemsQueue.remove(at: index)
-        }
+        itemsQueue.remove(item)
     }
     
     /// Inserts the item into the queue at the appropriate index, removing it first it's present.
@@ -54,7 +55,7 @@ public class SMVSet: NSManagedObject
     public func addItem(front: String, back: String)
     {
         let item = SMVItem(front: front, back: back, into: self)
-        itemsQueue.insert(item, at: _findIndexToInsert(item: item))
+        insertIntoQueue(item: item)
     }
     
     /// Remove the item from the queue and delete it from CoreData.
@@ -67,13 +68,13 @@ public class SMVSet: NSManagedObject
     /// Returns the next item which is past due date in the queue, nil if none.
     public func nextItem(isAdvanceable: Bool = false)-> SMVItem?
     {
-        if itemsQueue.isEmpty
+        if itemsQueue.count == 0
         {
             return nil
         }
-        if isAdvanceable || itemsQueue[0].dueDate!.timeIntervalSinceNow < 0
+        if isAdvanceable || (itemsQueue[0] as! SMVItem).dueDate!.timeIntervalSinceNow < 0
         {
-            return itemsQueue[0]
+            return (itemsQueue[0] as! SMVItem)
         }
         return nil
     }
@@ -84,7 +85,7 @@ public class SMVSet: NSManagedObject
     {
         self.init(context: sCDHelper.viewContext)
         self.name = name
-        self.detail = description
+        self.detail = detail
         self.creationDate = Date()
     }
     
@@ -103,7 +104,7 @@ public class SMVSet: NSManagedObject
     public var urgency: Urgency
     {
         let overdueCnt = itemsQueue.prefix(10).count(where: { (item) in
-            item.dueDate!.timeIntervalSinceNow < 0
+            (item as! SMVItem).dueDate!.timeIntervalSinceNow < 0
         })
         if overdueCnt > 10
         {
