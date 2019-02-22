@@ -38,10 +38,11 @@ class DeckCell: UICollectionViewCell
         
         layer.shadowColor = UIColor.shadowGrey.cgColor
         layer.shadowOffset = .zero
-        layer.shadowRadius = 10
+        layer.shadowRadius = 5
         layer.shadowOpacity = 0.35
         layer.masksToBounds = false
-        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: contentView.layer.cornerRadius).cgPath
+        layer.shadowPath = UIBezierPath(roundedRect: bounds,
+                                        cornerRadius: contentView.layer.cornerRadius).cgPath
         layer.backgroundColor = UIColor.clear.cgColor
         
         // setup nameLabel
@@ -99,8 +100,10 @@ extension SMVSet.Urgency
     }
 }
 
-class TopAlignedLabel: UILabel {
-    override func drawText(in rect: CGRect) {
+class TopAlignedLabel: UILabel
+{
+    override func drawText(in rect: CGRect)
+    {
         let textRect = super.textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines)
         super.drawText(in: textRect)
     }

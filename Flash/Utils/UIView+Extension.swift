@@ -15,7 +15,7 @@ extension UIView
         layer.masksToBounds = false
         layer.shadowOffset = .zero
         layer.shadowColor = UIColor.shadowGrey.cgColor
-        layer.shadowOpacity = 0.4
+        layer.shadowOpacity = 0.35
         layer.shadowRadius = radius
     }
 }

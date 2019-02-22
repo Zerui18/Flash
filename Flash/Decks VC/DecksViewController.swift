@@ -38,7 +38,7 @@ class DecksViewController: UIViewController
     private func setupLayout()
     {
         title = "Decks"
-        decksCollectionView.bounces = true
+        decksCollectionView.alwaysBounceVertical = true
         decksCollectionView.backgroundColor = .bgGrey
         decksCollectionView.dataSource = self
         decksCollectionView.delegate = self
@@ -78,5 +78,11 @@ extension DecksViewController: UICollectionViewDataSource, UICollectionViewDeleg
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DeckCell
         cell.set = SMVEngine.shared.sets[indexPath.item]
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cardsVC = CardsViewController()
+        cardsVC.set = SMVEngine.shared.sets[indexPath.item]
+        navigationController!.pushViewController(cardsVC, animated: true)
     }
 }

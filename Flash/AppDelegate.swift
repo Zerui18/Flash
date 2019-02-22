@@ -21,12 +21,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         let rootVC = UINavigationController(rootViewController: decksVC)
         rootVC.navigationBar.prefersLargeTitles = true
         rootVC.navigationBar.largeTitleTextAttributes = [
-            .font               :   UIFont.systemFont(ofSize: 52, weight: .medium),
+            .font               :   UIFont.systemFont(ofSize: 48, weight: .medium),
             .foregroundColor    :   UIColor.white
         ]
         rootVC.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         rootVC.navigationBar.isTranslucent = false
         rootVC.navigationBar.barTintColor = .pBlue
+        rootVC.navigationBar.tintColor = .white
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
         return true

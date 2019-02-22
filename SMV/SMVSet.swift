@@ -15,6 +15,11 @@ public class SMVSet: NSManagedObject
     
     lazy var itemsQueue = mutableOrderedSetValue(forKey: "itemsQueueAny")
     
+    public var numberOfItems: Int
+    {
+        return itemsQueue.count
+    }
+    
     /// Finds the appropriate index in the queue to insert the given item with binary search.
     private func _findIndexToInsert(item: SMVItem, lowerI: Int = 0, upperI: Int = -1)-> Int
     {
@@ -77,6 +82,12 @@ public class SMVSet: NSManagedObject
             return (itemsQueue[0] as! SMVItem)
         }
         return nil
+    }
+    
+    /// Returns the item in the queue at the given index.
+    public subscript(_ index: Int)-> SMVItem
+    {
+        return itemsQueue[index] as! SMVItem
     }
     
     // MARK: Init
