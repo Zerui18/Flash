@@ -49,7 +49,7 @@ class DecksViewController: UIViewController
         addButton.layer.cornerRadius = 64 / 2
         addButton.backgroundColor = .pBlue
         addButton.tintColor = .white
-        addButton.setImage(#imageLiteral(resourceName: "baseline_add_white_48pt"), for: .normal)
+        addButton.setImage(#imageLiteral(resourceName: "ic_add"), for: .normal)
         addButton.layer.masksToBounds = false
         addButton.addShadow(ofRadius: 15)
         view.addSubview(addButton)

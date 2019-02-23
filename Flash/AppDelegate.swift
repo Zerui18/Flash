@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
             .font               :   UIFont.systemFont(ofSize: 48, weight: .medium),
             .foregroundColor    :   UIColor.white
         ]
+        rootVC.navigationBar.barStyle = .black
         rootVC.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         rootVC.navigationBar.isTranslucent = false
         rootVC.navigationBar.barTintColor = .pBlue

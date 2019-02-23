@@ -15,6 +15,5 @@ extension UIColor
     static let pRed = UIColor(named: "PrimaryRed")!
     static let shadowGrey = UIColor(named: "ShadowGrey")!
     static let textGrey = UIColor(named: "TextGrey")!
-    static let textBlue = UIColor(named: "TextBlue")!
     static let bgGrey = UIColor(named: "BgGrey")!
 }

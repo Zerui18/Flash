@@ -35,7 +35,7 @@ class DeckCell: UICollectionViewCell
         contentView.layer.borderWidth = 1.0
         contentView.layer.borderColor = UIColor.clear.cgColor
         contentView.layer.masksToBounds = true
-        
+        // shadow
         layer.shadowColor = UIColor.shadowGrey.cgColor
         layer.shadowOffset = .zero
         layer.shadowRadius = 5
